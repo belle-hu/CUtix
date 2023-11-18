@@ -13,7 +13,7 @@ event_user_assoc = db.Table(
 
 class User(db.Model):
     """
-    User Model. Hi!
+    User Model.
     """
 
     __tablename__ = "user"
