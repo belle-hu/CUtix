@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import SnapKit
 
+protocol AddTicketDelegate: AnyObject {
+    func addNewTicket(to title: String, to location: String, to date: String, to fromTime: String, to toTime: String, to eventDetail: String, to tags: [String])
+}
+
 class TicketViewController: UIViewController {
     
     // MARK: - Properties (view)
