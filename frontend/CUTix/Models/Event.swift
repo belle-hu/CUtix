@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Ticket {
+struct Event {
     let id: String
     let month: String
     let year: String
@@ -15,6 +15,8 @@ struct Ticket {
     let time: String
     let location: String
     let organization: String
+    let eventType: String
     let price: String
-    let imageUrl: String
+    let ticketImageUrl: String
+    let eventImageUrl: String
 }

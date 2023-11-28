@@ -9,5 +9,6 @@ target 'CUTix' do
 
   pod 'SnapKit'
   pod 'Alamofire'
+  pod 'SDWebImage'
 
 end

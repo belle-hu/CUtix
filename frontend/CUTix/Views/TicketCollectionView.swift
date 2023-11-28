@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 import SnapKit
+import SDWebImage
 
 class TicketCollectionView: UICollectionViewCell {
     // MARK: - Properties (view)
     
-    private let ticketImage = UIImageView()
-    private let ticketPrice = UILabel()
+    private let eventImage = UIImageView()
+    private let lowestPrice = UILabel()
     private let ticketDate = UILabel()
     private let ticketIdentifiers = UILabel()
     
@@ -25,6 +26,11 @@ class TicketCollectionView: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupEventImage()
+        setupLowestPrice()
+        setupTicketDate()
+        setupTicketIdentifiers()
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -32,37 +38,37 @@ class TicketCollectionView: UICollectionViewCell {
     
     // MARK: - configure
     
-    func configure(dummyData: Ticket) {
-        ticketPrice.text = dummyData.price
+    func configure(dummyData: Event) {
+        lowestPrice.text = dummyData.price
         ticketDate.text = dummyData.month + "\n" + dummyData.year
         ticketIdentifiers.text = """
             \(dummyData.day) - \(dummyData.time)
             \(dummyData.location)
             \(dummyData.organization)
         """
-        ticketImage.image = UIImage(named: dummyData.imageUrl)
+        eventImage.sd_setImage(with: URL(string: dummyData.eventImageUrl))
     }
     
     // MARK: - Set Up Views
-    func setupTicketImage() {
-        ticketImage.layer.cornerRadius = 15
-        ticketImage.layer.masksToBounds = true
-        contentView.addSubview(ticketImage)
+    func setupEventImage() {
+        eventImage.layer.cornerRadius = 15
+        eventImage.layer.masksToBounds = true
+        contentView.addSubview(eventImage)
         
-        ticketImage.snp.makeConstraints { make in
+        eventImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(219)
         }
     }
     
-    func setupTicketPrice() {
-        ticketPrice.textColor = .black
-        ticketPrice.font = UIFont(name: "SF Pro", size: 30)
-        contentView.addSubview(ticketPrice)
+    func setupLowestPrice() {
+        lowestPrice.textColor = .black
+        lowestPrice.font = UIFont(name: "SF Pro", size: 30)
+        contentView.addSubview(lowestPrice)
         
-        ticketPrice.snp.makeConstraints { make in
-            make.top.equalTo(ticketImage.snp.top).offset(-16)
-            make.leading.equalTo(ticketImage.snp.leading).offset(252)
+        lowestPrice.snp.makeConstraints { make in
+            make.top.equalTo(eventImage.snp.top).offset(-16)
+            make.leading.equalTo(eventImage.snp.leading).offset(252)
         }
     }
     
@@ -72,8 +78,8 @@ class TicketCollectionView: UICollectionViewCell {
         contentView.addSubview(ticketDate)
         
         ticketDate.snp.makeConstraints { make in
-            make.leading.equalTo(ticketImage.snp.leading).offset(13)
-            make.top.equalTo(ticketImage.snp.top).offset(-26)
+            make.leading.equalTo(eventImage.snp.leading).offset(13)
+            make.top.equalTo(eventImage.snp.top).offset(-26)
         }
     }
     
@@ -83,8 +89,8 @@ class TicketCollectionView: UICollectionViewCell {
         contentView.addSubview(ticketIdentifiers)
         
         ticketIdentifiers.snp.makeConstraints { make in
-            make.top.equalTo(ticketImage.snp.top).offset(-34)
-            make.leading.equalTo(ticketImage.snp.leading).offset(17)
+            make.top.equalTo(eventImage.snp.top).offset(-34)
+            make.leading.equalTo(eventImage.snp.leading).offset(17)
         }
     }
 }

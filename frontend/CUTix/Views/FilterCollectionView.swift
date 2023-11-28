@@ -53,7 +53,7 @@ class FilterCollectionView: UICollectionViewCell {
         }
         else {
             filterLabel.textColor = .black
-            filterLabel.backgroundColor = .darkGray
+            filterLabel.backgroundColor = .lightGray
         }
     }
     

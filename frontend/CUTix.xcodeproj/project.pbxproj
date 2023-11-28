@@ -10,13 +10,14 @@
 		90F4689B351466DBF993082B /* Pods_CUTix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98E1284FCBFBFC5C5C68239 /* Pods_CUTix.framework */; };
 		A626EC502B09B6EA00D9E23E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC4F2B09B6EA00D9E23E /* AppDelegate.swift */; };
 		A626EC522B09B6EA00D9E23E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC512B09B6EA00D9E23E /* SceneDelegate.swift */; };
-		A626EC542B09B6EA00D9E23E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC532B09B6EA00D9E23E /* ViewController.swift */; };
 		A626EC592B09B6EB00D9E23E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A626EC582B09B6EB00D9E23E /* Assets.xcassets */; };
 		A626EC5C2B09B6EB00D9E23E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A626EC5A2B09B6EB00D9E23E /* LaunchScreen.storyboard */; };
 		A626EC672B09B89000D9E23E /* TicketCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC662B09B89000D9E23E /* TicketCollectionView.swift */; };
-		A626EC692B09B8B700D9E23E /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC682B09B8B700D9E23E /* Ticket.swift */; };
+		A626EC692B09B8B700D9E23E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC682B09B8B700D9E23E /* Event.swift */; };
 		A626EC6B2B09B8D900D9E23E /* TicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC6A2B09B8D900D9E23E /* TicketViewController.swift */; };
 		A64E545E2B0AEE8300DC20DD /* FilterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E545D2B0AEE8300DC20DD /* FilterCollectionView.swift */; };
+		A64E54602B132A6E00DC20DD /* DetailedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E545F2B132A6E00DC20DD /* DetailedVC.swift */; };
+		A64E54622B1345CF00DC20DD /* DetailedEventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E54612B1345CF00DC20DD /* DetailedEventCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,14 +26,15 @@
 		A626EC4C2B09B6EA00D9E23E /* CUTix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CUTix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A626EC4F2B09B6EA00D9E23E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A626EC512B09B6EA00D9E23E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A626EC532B09B6EA00D9E23E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A626EC582B09B6EB00D9E23E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A626EC5B2B09B6EB00D9E23E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A626EC5D2B09B6EB00D9E23E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A626EC662B09B89000D9E23E /* TicketCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCollectionView.swift; sourceTree = "<group>"; };
-		A626EC682B09B8B700D9E23E /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
+		A626EC682B09B8B700D9E23E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A626EC6A2B09B8D900D9E23E /* TicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketViewController.swift; sourceTree = "<group>"; };
 		A64E545D2B0AEE8300DC20DD /* FilterCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionView.swift; sourceTree = "<group>"; };
+		A64E545F2B132A6E00DC20DD /* DetailedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVC.swift; sourceTree = "<group>"; };
+		A64E54612B1345CF00DC20DD /* DetailedEventCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEventCollectionView.swift; sourceTree = "<group>"; };
 		A98E1284FCBFBFC5C5C68239 /* Pods_CUTix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CUTix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -91,7 +93,6 @@
 				A626EC632B09B87000D9E23E /* Controllers */,
 				A626EC4F2B09B6EA00D9E23E /* AppDelegate.swift */,
 				A626EC512B09B6EA00D9E23E /* SceneDelegate.swift */,
-				A626EC532B09B6EA00D9E23E /* ViewController.swift */,
 				A626EC582B09B6EB00D9E23E /* Assets.xcassets */,
 				A626EC5A2B09B6EB00D9E23E /* LaunchScreen.storyboard */,
 				A626EC5D2B09B6EB00D9E23E /* Info.plist */,
@@ -103,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				A626EC6A2B09B8D900D9E23E /* TicketViewController.swift */,
+				A64E545F2B132A6E00DC20DD /* DetailedVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -110,7 +112,7 @@
 		A626EC642B09B87700D9E23E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A626EC682B09B8B700D9E23E /* Ticket.swift */,
+				A626EC682B09B8B700D9E23E /* Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,6 +122,7 @@
 			children = (
 				A64E545D2B0AEE8300DC20DD /* FilterCollectionView.swift */,
 				A626EC662B09B89000D9E23E /* TicketCollectionView.swift */,
+				A64E54612B1345CF00DC20DD /* DetailedEventCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,10 +241,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A64E54602B132A6E00DC20DD /* DetailedVC.swift in Sources */,
+				A64E54622B1345CF00DC20DD /* DetailedEventCollectionView.swift in Sources */,
 				A626EC672B09B89000D9E23E /* TicketCollectionView.swift in Sources */,
-				A626EC542B09B6EA00D9E23E /* ViewController.swift in Sources */,
 				A64E545E2B0AEE8300DC20DD /* FilterCollectionView.swift in Sources */,
-				A626EC692B09B8B700D9E23E /* Ticket.swift in Sources */,
+				A626EC692B09B8B700D9E23E /* Event.swift in Sources */,
 				A626EC502B09B6EA00D9E23E /* AppDelegate.swift in Sources */,
 				A626EC6B2B09B8D900D9E23E /* TicketViewController.swift in Sources */,
 				A626EC522B09B6EA00D9E23E /* SceneDelegate.swift in Sources */,
@@ -299,7 +303,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -362,7 +366,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
