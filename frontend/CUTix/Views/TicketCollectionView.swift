@@ -2,96 +2,83 @@
 //  TicketCollectionView.swift
 //  CUTix
 //
-//  Created by Maisie Yan on 11/18/23.
+//  Created by Maisie Yan on 11/26/23.
 //
 
 import Foundation
 import UIKit
 import SnapKit
-import SDWebImage
 
 class TicketCollectionView: UICollectionViewCell {
     // MARK: - Properties (view)
-    
-    private let eventImage = UIImageView()
-    private let lowestPrice = UILabel()
-    private let ticketDate = UILabel()
-    private let ticketIdentifiers = UILabel()
-    
-    static let reuse = "TicketCollectionViewReuse"
 
-    
+    private let ticketTime = UILabel()
+    private let ticketPrice = UILabel()
+    private let ticketImage = UIImageView()
+    private let ticketName = UILabel()
+
+    // MARK: - Properties (data)
+    static let reuse = "TicketCollectionView"
+
     // MARK: - init
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupEventImage()
-        setupLowestPrice()
-        setupTicketDate()
-        setupTicketIdentifiers()
-        
+        setupTicketImage()
+        setupTicketPrice()
+        setupTicketTime()
     }
+
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented" )
     }
-    
-    // MARK: - configure
-    
-    func configure(dummyData: Event) {
-        lowestPrice.text = dummyData.price
-        ticketDate.text = dummyData.month + "\n" + dummyData.year
-        ticketIdentifiers.text = """
-            \(dummyData.day) - \(dummyData.time)
-            \(dummyData.location)
-            \(dummyData.organization)
-        """
-        eventImage.sd_setImage(with: URL(string: dummyData.eventImageUrl))
+
+    func configure(event: Event, ticket: Ticket) {
+        ticketPrice.text = "$" + String(ticket.cost)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy 'at' h:mm a"
+        ticketTime.text = dateFormatter.string(from: event.time)
+        ticketImage.sd_setImage(with: URL(string: event.eventImageUrl))
     }
     
     // MARK: - Set Up Views
-    func setupEventImage() {
-        eventImage.layer.cornerRadius = 15
-        eventImage.layer.masksToBounds = true
-        contentView.addSubview(eventImage)
+    
+    func setupTicketImage() {
+        ticketImage.layer.cornerRadius = 15
+        ticketImage.layer.masksToBounds = true
+        contentView.addSubview(ticketImage)
         
-        eventImage.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(219)
+        ticketImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.height.equalTo(140)
+            make.width.equalTo(345)
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-15)
+        }
+    }
+        
+    func setupTicketPrice() {
+        ticketPrice.textColor = .black
+        ticketPrice.font = UIFont(name: "SF Pro", size: 30)
+        contentView.addSubview(ticketPrice)
+        
+        ticketPrice.snp.makeConstraints { make in
+            make.top.equalTo(ticketImage.snp.top).offset(16)
+            make.trailing.equalTo(ticketImage.snp.trailing).offset(-30)
         }
     }
     
-    func setupLowestPrice() {
-        lowestPrice.textColor = .black
-        lowestPrice.font = UIFont(name: "SF Pro", size: 30)
-        contentView.addSubview(lowestPrice)
+    func setupTicketTime() {
+        ticketTime.textColor = .black
+        ticketTime.font = UIFont(name: "SF Pro", size: 20)
+        contentView.addSubview(ticketTime)
         
-        lowestPrice.snp.makeConstraints { make in
-            make.top.equalTo(eventImage.snp.top).offset(-16)
-            make.leading.equalTo(eventImage.snp.leading).offset(252)
+        ticketTime.snp.makeConstraints { make in
+            make.leading.equalTo(ticketImage.snp.leading).offset(8)
+            make.top.equalTo(ticketPrice.snp.top)
         }
     }
     
-    func setupTicketDate() {
-        ticketDate.textColor = .black
-        ticketDate.font = UIFont(name: "SF Pro", size: 20)
-        contentView.addSubview(ticketDate)
-        
-        ticketDate.snp.makeConstraints { make in
-            make.leading.equalTo(eventImage.snp.leading).offset(13)
-            make.top.equalTo(eventImage.snp.top).offset(-26)
-        }
-    }
-    
-    func setupTicketIdentifiers() {
-        ticketIdentifiers.textColor = .black
-        ticketIdentifiers.font = UIFont(name: "SF Pro", size: 14)
-        contentView.addSubview(ticketIdentifiers)
-        
-        ticketIdentifiers.snp.makeConstraints { make in
-            make.top.equalTo(eventImage.snp.top).offset(-34)
-            make.leading.equalTo(eventImage.snp.leading).offset(17)
-        }
-    }
 }
 
