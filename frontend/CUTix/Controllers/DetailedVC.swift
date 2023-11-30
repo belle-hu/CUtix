@@ -16,13 +16,13 @@ class DetailedVC: UIViewController {
     private let refreshControl = UIRefreshControl()
     private let availableTitle = UILabel()
     private let ticketTitle = UILabel()
-    
     private let searchButton = UIButton()
     private let moneyButton = UIButton()
     private let profileButton = UIButton()
     
     // MARK: - Properties (data)
     private var event: Event
+    //private var user: User
     
     var dummyData: [Ticket] = [Ticket(id:3581, cost: 13, holderId: 56, isSelling: true, eventId: 1234), Ticket(id: 32542, cost: 80, holderId: 16, isSelling: true, eventId: 9876)]
     var matchedTickets: [Ticket] {
@@ -44,6 +44,7 @@ class DetailedVC: UIViewController {
     init(event: Event) {
         self.event = event
         ticketTitle.text = event.name
+        //ticketpriceLabel.text = String(event.price)
         super.init(nibName: nil, bundle: nil)
     }
     

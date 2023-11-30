@@ -24,6 +24,10 @@ class TicketInfoVC: UIViewController {
     private let sellerUsername = UILabel()
     private let contactSellerButton = UIButton()
     private let makeOfferButton = UIButton()
+    private let subtotalLabel = UILabel()
+    private let dollarLabel = UILabel()
+    private let ticketpriceLabel = UILabel()
+    private let purchaseButton = UIButton()
     
     // MARK: - Properties (data)
     private var ticket: Ticket
@@ -46,16 +50,23 @@ class TicketInfoVC: UIViewController {
         setupSellerUsername()
         setupContactSellerButton()
         setupMakeOfferButton()
+        setupTicketPriceLabel()
+        setupSubtotalLabel()
+        setupDollarLabel()
+        setupPurchaseButton()
     }
     
-    init(ticket: Ticket, event: Event, user: User) {
+    init(ticket: Ticket, event: Event) {
         self.ticket = ticket
         nameLabel.text = event.name
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM d, yyyy 'at' h:mm a"
         dateLocationLabel.text = dateFormatter.string(from: event.time) + " - " + event.location
         self.event = event
-        sellerUsername.text = user.name
+        //sellerUsername.text = user.name
+        sellerUsername.text = String(ticket.holderId)
+        ticketpriceLabel.text = String(ticket.cost)
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -70,26 +81,28 @@ class TicketInfoVC: UIViewController {
     // MARK: - Set Up Views
     
     private func setupName() {
-        nameLabel.font = UIFont(name: "SF Pro", size: 20)
-        nameLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        nameLabel.font = UIFont(name: "SF Pro", size: 24)
+        nameLabel.font = .systemFont(ofSize: 24, weight: .semibold)
         view.addSubview(nameLabel)
         
         nameLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(21)
-            make.top.equalToSuperview().offset(125)
+            make.top.equalToSuperview().offset(100)
+            //make.leading.equalToSuperview().offset(18)
         }
     }
     
     private func setupDateLocation() {
-        dateLocationLabel.font = UIFont(name: "SF Pro", size: 20)
-        dateLocationLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-        dateLocationLabel.numberOfLines = 2
+        dateLocationLabel.font = UIFont(name: "SF Pro", size: 24)
+        dateLocationLabel.font = .systemFont(ofSize: 24, weight: .semibold)
+        dateLocationLabel.numberOfLines = 0
         view.addSubview(dateLocationLabel)
         
         dateLocationLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(nameLabel.snp.bottom).offset(5)
-            make.trailing.equalToSuperview().offset(10)
+            make.top.equalTo(nameLabel.snp.bottom)
+            make.trailing.equalToSuperview().offset(-24)
+            make.trailing.equalToSuperview().offset(-8)
         }
     }
     
@@ -110,7 +123,7 @@ class TicketInfoVC: UIViewController {
         
         secondLine.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(firstLine.snp.bottom).offset(478)
+            make.top.equalTo(firstLine.snp.bottom).offset(476)
             make.height.equalTo(1)
         }
     }
@@ -122,7 +135,7 @@ class TicketInfoVC: UIViewController {
         view.addSubview(descriptionLabel)
         
         descriptionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(dateLocationLabel.snp.leading)
+            make.leading.equalTo(nameLabel.snp.leading)
             make.top.equalTo(firstLine.snp.bottom).offset(34)
         }
         
@@ -166,8 +179,7 @@ class TicketInfoVC: UIViewController {
     private func setupSellerUsername() {
         sellerUsername.font = UIFont(name: "SF Pro", size: 12)
         sellerUsername.font = .systemFont(ofSize: 12, weight: .semibold)
-        view.addSubview(usernameLabel)
-        
+        view.addSubview(sellerUsername)
         sellerUsername.snp.makeConstraints { make in
             make.leading.equalTo(profileImage.snp.trailing).offset(7)
             make.top.equalTo(aboutSellerLabel.snp.bottom).offset(31)
@@ -196,6 +208,7 @@ class TicketInfoVC: UIViewController {
         makeOfferButton.setTitleColor(UIColor.white, for: .normal)
         makeOfferButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         makeOfferButton.layer.cornerRadius = 20
+        //makeOfferButton.addTarget(self, action: #selector(makeOfferButtonTapped), for: .touchUpInside)
         view.addSubview(makeOfferButton)
         
         makeOfferButton.snp.makeConstraints { make in
@@ -203,7 +216,110 @@ class TicketInfoVC: UIViewController {
             make.leading.equalToSuperview().offset(18)
             make.trailing.equalToSuperview().offset(-18)
             make.height.equalTo(41)
+            
+        }
+        
+        //makeOfferButton.addTarget(self, action: #selector(makeOfferButtonTapped), for: .touchUpInside)
+    }
+
+    private func setupSubtotalLabel() {
+        subtotalLabel.text = "Subtotal"
+        subtotalLabel.font = UIFont(name: "SF Pro", size: 20)
+        subtotalLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        view.addSubview(subtotalLabel)
+        
+        subtotalLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(18)
+            make.top.equalTo(secondLine.snp.bottom).offset(20.96)
+            make.bottom.equalToSuperview().offset(-138)
+            make.height.equalTo(24)
+        }
+    }
+
+    private func setupDollarLabel() {
+        dollarLabel.text = "$"
+        dollarLabel.font = UIFont(name: "SF Pro", size: 32)
+        dollarLabel.font = .systemFont(ofSize: 32, weight: .semibold)
+        view.addSubview(dollarLabel)
+        
+        dollarLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(ticketpriceLabel.snp.leading).offset(-5)
+            make.top.equalTo(secondLine.snp.bottom).offset(20.96)
+            make.centerY.equalTo(ticketpriceLabel.snp.centerY)
         }
     }
     
+    private func setupTicketPriceLabel() {
+        ticketpriceLabel.font = UIFont(name: "SF Pro", size: 32)
+        ticketpriceLabel.font = .systemFont(ofSize: 32, weight: .semibold)
+        ticketpriceLabel.numberOfLines = 1
+        view.addSubview(ticketpriceLabel)
+        
+        ticketpriceLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(265)
+            make.top.equalTo(secondLine.snp.bottom).offset(20.96)
+        }
+    }
+    
+//    private func setupPurchaseButton() {
+//        purchaseButton.setTitle("Purchase", for: .normal)
+//        purchaseButton.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
+//        purchaseButton.setTitleColor(UIColor.white, for: .normal)
+//        purchaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+//        purchaseButton.layer.cornerRadius = 20
+//        view.addSubview(purchaseButton)
+//        
+//        purchaseButton.snp.makeConstraints { make in
+//            make.top.equalTo(profileImage.snp.bottom).offset(40)
+//            make.leading.equalToSuperview().offset(18)
+//            make.trailing.equalToSuperview().offset(-18)
+//            make.height.equalTo(41)
+//        }
+//    }
+
+    private func setupPurchaseButton() {
+        purchaseButton.setTitle("Purchase", for: .normal)
+        purchaseButton.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
+        purchaseButton.setTitleColor(UIColor.white, for: .normal)
+        purchaseButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        purchaseButton.layer.cornerRadius = 20
+        view.addSubview(purchaseButton)
+        
+        purchaseButton.snp.makeConstraints { make in
+            make.top.equalTo(ticketpriceLabel.snp.bottom).offset(27)
+            make.bottom.equalToSuperview().offset(-41)
+            make.width.equalTo(334)
+            make.height.equalTo(41)
+            make.centerX.equalToSuperview()
+        }
+        
+        purchaseButton.addTarget(self, action: #selector(purchaseButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func purchaseButtonTapped() {
+        let alertController = UIAlertController(title: nil, message: "Purchase Successful!", preferredStyle: .alert)
+        alertController.view.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
+        alertController.view.layer.cornerRadius = 20
+        alertController.view.frame.size = CGSize(width: 231, height: 49)
+        alertController.view.frame.origin.y = 240
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            alertController.dismiss(animated: true) {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+
+//    @objc func makeOfferButtonTapped() {
+//        let makeOfferVC = MakeOfferVC(ticket: Ticket, event: Event)
+//        self.navigationController?.pushViewController(makeOfferVC, animated: true)
+    
+//    }
+    
+    
 }
+
