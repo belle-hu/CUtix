@@ -39,6 +39,8 @@ class FilterCollectionView: UICollectionViewCell {
     
     func configure(filter: String, isSelected: Bool) {
         filterLabel.text = filter
+        filterLabel.font = UIFont(name: "SF Pro", size: 16)
+        filterLabel.font = .systemFont(ofSize: 16, weight: .semibold)
         self.isSelected = isSelected
         filterTapped()
     }

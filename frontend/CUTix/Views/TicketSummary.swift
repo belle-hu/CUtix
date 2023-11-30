@@ -33,9 +33,7 @@ class NewTicket: UIViewController {
     var categoryFilter: [String]!
     
     let textFieldHeight = 30
-    
-    weak var delegate: AddTicketDelegate?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -249,7 +247,6 @@ class NewTicket: UIViewController {
             postButton.setTitleColor(UIColor.lightGray, for: .normal)
             postButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
             postButton.backgroundColor = .white
-            postButton.addTarget(self, action: #selector(post), for: .touchUpInside)
             postButton.layer.masksToBounds = false
             postButton.layer.cornerRadius = 20
             postButton.layer.borderWidth = 2
@@ -292,16 +289,6 @@ class NewTicket: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-        @objc func post() {
-            if let title = titleTextField.text, let location = locationTextField.text, let date = dateTextField.text, let fromTime = startTimeTextField.text, let toTime = endTimeTextField.text, let eventDetail = descriptionTextField.text {
-                if title == "" || location == "" || date == "" || fromTime == "" || toTime == "" || eventDetail == "" {
-                    makeAlert()
-                } else {
-                    delegate?.addNewTicket(to: title, to: location, to: date, to: fromTime, to: toTime, to: eventDetail, to: selectedFilter)
-                }
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
     }
     
     

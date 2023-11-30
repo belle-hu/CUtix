@@ -8,15 +8,11 @@
 import Foundation
 
 struct Event {
-    let id: String
-    let month: String
-    let year: String
-    let day: String
-    let time: String
+    let id: Int
+    let name: String
+    let time: Date
+    let category: String
     let location: String
-    let organization: String
-    let eventType: String
-    let price: String
-    let ticketImageUrl: String
+    let price: Float
     let eventImageUrl: String
 }
