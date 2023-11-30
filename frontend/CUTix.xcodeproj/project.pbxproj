@@ -133,10 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				A626EC682B09B8B700D9E23E /* Event.swift */,
-<<<<<<< Updated upstream
 				2E908F7E2B184FB800D64C35 /* User.swift */,
-=======
->>>>>>> Stashed changes
 				A66353812B16B62D00599ACB /* Ticket.swift */,
 			);
 			path = Models;

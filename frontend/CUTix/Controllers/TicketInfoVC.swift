@@ -21,9 +21,6 @@ class TicketInfoVC: UIViewController {
     private let descriptionText = UILabel()
     private let aboutSellerLabel = UILabel()
     private let profileImage = UIImageView()
-    private let usernameLabel = UILabel()
-    private let contactSellerButton = UIButton()
-    private let makeOfferButton = UIButton()
     
     // MARK: - Properties (data)
     private var ticket: Ticket
@@ -43,9 +40,6 @@ class TicketInfoVC: UIViewController {
         setupDescriptionText()
         setupAboutSellerLabel()
         setupProfileImage()
-        setupSellerUsername()
-        setupContactSellerButton()
-        setupMakeOfferButton()
     }
     
     init(ticket: Ticket, event: Event) {
@@ -55,7 +49,6 @@ class TicketInfoVC: UIViewController {
         dateFormatter.dateFormat = "MMMM d, yyyy 'at' h:mm a"
         dateLocationLabel.text = dateFormatter.string(from: event.time) + " - " + event.location
         self.event = event
-        usernameLabel.text = String(ticket.holderId)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -162,48 +155,6 @@ class TicketInfoVC: UIViewController {
             make.top.equalTo(aboutSellerLabel.snp.bottom).offset(32)
         }
     }
-    
-    private func setupSellerUsername() {
-        usernameLabel.font = UIFont(name: "SF Pro", size: 12)
-        usernameLabel.font = .systemFont(ofSize: 12, weight: .semibold)
-        view.addSubview(usernameLabel)
-        
-        usernameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(profileImage.snp.trailing).offset(7)
-            make.top.equalTo(aboutSellerLabel.snp.bottom).offset(31)
-        }
-    }
-    
-    private func setupContactSellerButton() {
-        contactSellerButton.setTitle("Contact Seller", for: .normal)
-        contactSellerButton.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
-        contactSellerButton.setTitleColor(UIColor.white, for: .normal)
-        contactSellerButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        contactSellerButton.layer.cornerRadius = 20
-        view.addSubview(contactSellerButton)
-        
-        contactSellerButton.snp.makeConstraints { make in
-            make.top.equalTo(profileImage.snp.bottom).offset(40)
-            make.leading.equalToSuperview().offset(18)
-            make.trailing.equalToSuperview().offset(-18)
-            make.height.equalTo(41)
-        }
-    }
-    
-    private func setupMakeOfferButton() {
-        makeOfferButton.setTitle("Make Offer", for: .normal)
-        makeOfferButton.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
-        makeOfferButton.setTitleColor(UIColor.white, for: .normal)
-        makeOfferButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        makeOfferButton.layer.cornerRadius = 20
-        view.addSubview(makeOfferButton)
-        
-        makeOfferButton.snp.makeConstraints { make in
-            make.top.equalTo(contactSellerButton.snp.bottom).offset(18)
-            make.leading.equalToSuperview().offset(18)
-            make.trailing.equalToSuperview().offset(-18)
-            make.height.equalTo(41)
-        }
-    }
+
     
 }
