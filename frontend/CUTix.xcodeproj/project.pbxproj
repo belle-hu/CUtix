@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E908F7F2B184FB800D64C35 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E908F7E2B184FB800D64C35 /* User.swift */; };
 		90F4689B351466DBF993082B /* Pods_CUTix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98E1284FCBFBFC5C5C68239 /* Pods_CUTix.framework */; };
 		A626EC502B09B6EA00D9E23E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC4F2B09B6EA00D9E23E /* AppDelegate.swift */; };
 		A626EC522B09B6EA00D9E23E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A626EC512B09B6EA00D9E23E /* SceneDelegate.swift */; };
@@ -17,7 +18,6 @@
 		A64E54602B132A6E00DC20DD /* DetailedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E545F2B132A6E00DC20DD /* DetailedVC.swift */; };
 		A663537C2B16AE2D00599ACB /* SellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A663537B2B16AE2D00599ACB /* SellViewController.swift */; };
 		A663537E2B16AE4200599ACB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A663537D2B16AE4200599ACB /* ProfileViewController.swift */; };
-		A66353802B16B61E00599ACB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A663537F2B16B61E00599ACB /* User.swift */; };
 		A66353822B16B62D00599ACB /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66353812B16B62D00599ACB /* Ticket.swift */; };
 		A66353872B17096600599ACB /* TicketInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66353862B17096600599ACB /* TicketInfoVC.swift */; };
 		A66353A62B18281200599ACB /* FilterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66353A02B18281200599ACB /* FilterCollectionView.swift */; };
@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		2B648B8ACFF7362D69EFE9DA /* Pods-CUTix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CUTix.debug.xcconfig"; path = "Target Support Files/Pods-CUTix/Pods-CUTix.debug.xcconfig"; sourceTree = "<group>"; };
+		2E908F7E2B184FB800D64C35 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		87C36B52A102813EFB606095 /* Pods-CUTix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CUTix.release.xcconfig"; path = "Target Support Files/Pods-CUTix/Pods-CUTix.release.xcconfig"; sourceTree = "<group>"; };
 		A626EC4C2B09B6EA00D9E23E /* CUTix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CUTix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A626EC4F2B09B6EA00D9E23E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		A64E545F2B132A6E00DC20DD /* DetailedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVC.swift; sourceTree = "<group>"; };
 		A663537B2B16AE2D00599ACB /* SellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellViewController.swift; sourceTree = "<group>"; };
 		A663537D2B16AE4200599ACB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		A663537F2B16B61E00599ACB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../../../../Documents/User.swift; sourceTree = "<group>"; };
 		A66353812B16B62D00599ACB /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		A66353862B17096600599ACB /* TicketInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketInfoVC.swift; sourceTree = "<group>"; };
 		A66353A02B18281200599ACB /* FilterCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCollectionView.swift; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				A626EC682B09B8B700D9E23E /* Event.swift */,
-				A663537F2B16B61E00599ACB /* User.swift */,
+				2E908F7E2B184FB800D64C35 /* User.swift */,
 				A66353812B16B62D00599ACB /* Ticket.swift */,
 			);
 			path = Models;
@@ -272,6 +272,7 @@
 				A66353A62B18281200599ACB /* FilterCollectionView.swift in Sources */,
 				A66353822B16B62D00599ACB /* Ticket.swift in Sources */,
 				A626EC502B09B6EA00D9E23E /* AppDelegate.swift in Sources */,
+				2E908F7F2B184FB800D64C35 /* User.swift in Sources */,
 				A626EC6B2B09B8D900D9E23E /* EventViewController.swift in Sources */,
 				A66353A72B18281200599ACB /* TicketCollectionView.swift in Sources */,
 				A626EC522B09B6EA00D9E23E /* SceneDelegate.swift in Sources */,
@@ -279,7 +280,6 @@
 				A66353AA2B18281200599ACB /* TagFilterCell.swift in Sources */,
 				A66353872B17096600599ACB /* TicketInfoVC.swift in Sources */,
 				A66353AD2B182B9300599ACB /* EditProfileViewController.swift in Sources */,
-				A66353802B16B61E00599ACB /* User.swift in Sources */,
 				A66353A92B18281200599ACB /* EventCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
