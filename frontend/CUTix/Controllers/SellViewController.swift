@@ -27,15 +27,10 @@ class SellViewController: UIViewController {
     private let sellticketButton = UIButton()
     
     // MARK: - Properties (data)
-    let filters: [String] = ["All", "Concerts", "Clubs", "Sports", "Festivals", "Workshops"]
-    
     var dummyData: [Event] = [Event(id: 0987, name: "Football: Cornell vs Colgate", time: Date(timeIntervalSince1970: 1701399802), category: "Sports", location: "Ithaca", price: 20.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg"), Event(id: 5542, name: "Class Notes Concert", time: Date(timeIntervalSince1970: 1701399837), category: "Concerts", location: "Ithaca", price: 10.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg"), Event(id: 9876, name: "Track and Field Meet", time: Date(timeIntervalSince1970: 1708399200), category: "Sports", location: "Ithaca", price: 8.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg"), Event(id: 332, name: "DIY Workshop", time: Date(timeIntervalSince1970: 1718399300), category: "Workshops", location: "Upson", price: 5.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg")
     ]
     
     var allEvents: [Event] = []
-    var filtered: [Event] = []
-    var filterEvents: String? = nil
-    // var user: User
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -43,14 +38,14 @@ class SellViewController: UIViewController {
         // Do any additional setup after loading the view.
     
         navigationController?.navigationBar.prefersLargeTitles = true
-        view.backgroundColor = .white
         
-        filtered = dummyData
+
         allEvents = dummyData
         setupBottomBanner()
         setupEventTitle()
-        setupCollectionView()
+        setupCollectionViewSelling()
         setupButtons()
+        setupSellTicketButton()        
     }
     
     init() {
@@ -77,7 +72,7 @@ class SellViewController: UIViewController {
         
     }
     
-    private func setupCollectionView() {
+    private func setupCollectionViewSelling() {
         // Create a FlowLayout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -94,33 +89,50 @@ class SellViewController: UIViewController {
         view.addSubview(collectionViewSelling)
         
         collectionViewSelling.snp.makeConstraints { make in
-            make.trailing.leading.equalToSuperview()
+            make.trailing.leading.top.equalToSuperview()
             make.bottom.equalTo(bottomBanner.snp.top)
         }
         
     }
     
     private func setupSellTicketButton() {
-        sellticketButton.setTitle("Make Offer", for: .normal)
+        let whiteRectangle = UIView()
+        whiteRectangle.backgroundColor = UIColor.white
+
+        self.view.addSubview(whiteRectangle)
+
+        whiteRectangle.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(92)
+            make.bottom.equalTo(-41)
+        }
+
+        sellticketButton.setTitle("Sell Tickets", for: .normal)
         sellticketButton.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
         sellticketButton.setTitleColor(UIColor.white, for: .normal)
         sellticketButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         sellticketButton.layer.cornerRadius = 20
-        //makeOfferButton.addTarget(self, action: #selector(makeOfferButtonTapped), for: .touchUpInside)
-        view.addSubview(sellticketButton)
+
+        whiteRectangle.addSubview(sellticketButton)
+
         sellticketButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(703)
-            make.leading.equalToSuperview().offset(21)
-            make.trailing.equalToSuperview().offset(-20)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.height.equalTo(41)
+            make.width.equalToSuperview().offset(-40)
         }
-        
+
         sellticketButton.addTarget(self, action: #selector(sellticketButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func searchButtonTapped() {
+        let eventViewController = EventViewController()
+        navigationController?.pushViewController(eventViewController, animated: true)
     }
     
     @objc func sellticketButtonTapped() {
-        let NewTicket = NewTicket()
-        self.navigationController?.pushViewController(NewTicket, animated: true)
+        let newTicketViewController = NewTicket()
+        self.navigationController?.pushViewController(newTicketViewController, animated: true)
     }
         
     @objc private func moneyButtonTapped() {
@@ -140,6 +152,7 @@ class SellViewController: UIViewController {
         profileButton.setImage(UIImage(named: "whiteProfile"), for: .normal)
         moneyButton.setImage(UIImage(named: "whiteMoney"), for: .normal)
         
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         moneyButton.addTarget(self, action: #selector(moneyButtonTapped), for: .touchUpInside)
         profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
   
@@ -183,16 +196,13 @@ class SellViewController: UIViewController {
 extension SellViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == collectionViewSelling {
-            return filtered.count
-        }
-        return 0
+        return dummyData.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SellingTicketCollectionView.reuse, for: indexPath) as? SellingTicketCollectionView else { return UICollectionViewCell() }
-            cell.configure(dummyData: filtered[indexPath.row])
-            return cell
+            cell.configure(dummyData: dummyData[indexPath.row])
+        return cell
         }
 
 }
@@ -201,12 +211,9 @@ extension SellViewController: UICollectionViewDataSource {
 
 extension SellViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == collectionViewSelling {
             let width = collectionView.frame.width - 16
             let height : CGFloat = 126
             return CGSize(width: width, height: height)
-        }
-        return CGSize(width: 100, height: 100)
     }
 }
 

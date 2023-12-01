@@ -36,10 +36,10 @@ class MakeOfferVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        setupName()
-        setupDateLocation()
-        setupOfferFirstLine()
-        setupOfferSecondLine()
+//        setupName()
+//        setupDateLocation()
+//        setupOfferFirstLine()
+//        setupOfferSecondLine()
 //        setupOriginalPriceLabel()
 //        setupOfferThirdLine()
 //        setupOriginalPriceField()
