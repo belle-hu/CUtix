@@ -72,7 +72,7 @@ class EventCollectionView: UICollectionViewCell {
     func setupLowestPrice() {
         lowestPrice.textColor = .black
         lowestPrice.font = UIFont(name: "SF Pro", size: 20)
-        lowestPrice.font = .systemFont(ofSize: 20, weight: .semibold)
+        lowestPrice.font = .systemFont(ofSize: 20, weight: .bold)
         contentView.addSubview(lowestPrice)
         
         lowestPrice.snp.makeConstraints { make in
@@ -83,7 +83,8 @@ class EventCollectionView: UICollectionViewCell {
     
     func setupEventName() {
         eventName.textColor = .black
-        eventName.font = UIFont(name: "SF Pro", size: 14)
+        eventName.font = UIFont(name: "SF Pro", size: 18)
+        eventName.font = .systemFont(ofSize: 18, weight: .semibold)
         contentView.addSubview(eventName)
         
         eventName.snp.makeConstraints { make in
@@ -94,7 +95,8 @@ class EventCollectionView: UICollectionViewCell {
     
     func setupEventTime() {
         eventTime.textColor = .black
-        eventTime.font = UIFont(name: "SF Pro", size: 20)
+        eventTime.font = UIFont(name: "SF Pro", size: 18)
+        eventTime.font = .systemFont(ofSize: 18, weight: .semibold)
         contentView.addSubview(eventTime)
         
         eventTime.snp.makeConstraints { make in
@@ -105,7 +107,8 @@ class EventCollectionView: UICollectionViewCell {
     
     func setupEventLocation() {
         eventLocation.textColor = .black
-        eventLocation.font = UIFont(name: "SF Pro", size: 14)
+        eventLocation.font = UIFont(name: "SF Pro", size: 18)
+        eventLocation.font = .systemFont(ofSize: 18, weight: .semibold)
         contentView.addSubview(eventLocation)
         
         eventLocation.snp.makeConstraints { make in
