@@ -33,42 +33,168 @@ def failure_response(message, code=404):
 
 # -- USER ROUTES ------------------------------------------------------
 @app.route("/")
+@app.route("/api/users/", methods=["POST"])
+def create_user():
+    """
+    Endpoint for creating a new user.
+    """
+    body = json.loads(request.data)
+    input_name = body.get("name")
+    input_netid = body.get("netid")
+    if input_name is None or input_netid is None:
+        return failure_response("Missing name or netid!", 400)
+    new_user = User(name=body.get("name"), holding_tickets=[], netid=body.get("netid"))
+    db.session.add(new_user)
+    db.session.commit()
+    return success_response(new_user.serialize(), 201)
 
-# get user by id
+
 @app.route("/api/users/<int:user_id>/", methods=["GET"])
 def get_user(user_id):
     """
     Endpoint for getting a user by id.
     """
-    pass
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!")
+    return success_response(user.serialize())
 
 
 # -- EVENT ROUTES ------------------------------------------------------
-# get all events
+
+
+@app.route("/api/events/", methods=["POST"])
+def create_event():
+    """
+    Endpoint for creating a new event.
+    """
+    body = json.loads(request.data)
+    input_name = body.get("name")
+    input_time = body.get("time")
+    input_category = body.get("category")
+    input_location = body.get("string")
+    if (
+        input_name is None
+        or input_time is None
+        or input_category is None
+        or input_location is None
+    ):
+        return failure_response("Missing event field!", 400)
+    new_event = Event(
+        name=input_name,
+        time=input_time,
+        category=input_category,
+        location=input_location,
+    )
+    db.session.add(new_event)
+    db.session.commit()
+    return success_response(new_event.serialize(), 201)
+
+
 @app.route("/api/events/", methods=["GET"])
 def get_events():
-    pass
+    """
+    Endpoint for getting all events.
+    """
+    events = [event.serialize() for event in Event.query.all()]
+    return success_response({"Events": events})
 
 
-# get events by search, case insensitive
 @app.route("/api/events/", methods=["GET"])
 def get_events_by_search():
-    pass
+    """
+    Endpoint for getting events by search, case-insensitive.
+    """
+    body = json.loads(request.data)
+    # initialize task
+    name = body.get("name")
+    if name == None:
+        return failure_response("Missing name in request", 400)
+    case_insn_events = get_case_insn_events(name)
+    # missing_char_events = get_missing_char_events(name)
+    space_insn_events = get_space_events(name)
+    all_events = {
+        "case insensitive equal events": case_insn_events,
+        "space insensitive equal events": space_insn_events,
+    }
+    return success_response(all_events)
+
+
+def get_case_insn_events(name):
+    valid_events = []
+    for ticket in Ticket.query.all():
+        nam = ticket.name
+        if nam.casefold() == name.casefold():
+            valid_events.append(ticket.serialize())
+    return valid_events
+
+
+def get_space_events(name):
+    valid_events = []
+    for ticket in Ticket.query.all():
+        nam_strip = ticket.name.replace(" ", "")
+        name_strip = name.replace(" ", "")
+        if nam_strip.casefold() == name_strip.casefold():
+            valid_events.append(ticket.serialize())
+    return valid_events
 
 
 # -- TICKET ROUTES ------------------------------------------------------
+@app.route("/api/tickets/", methods=["POST"])
+def create_ticket():
+    """
+    Endpoint for creating a new ticket.
+    """
+    body = json.loads(request.data)
+    input_cost = body.get("cost")
+    input_holder_id = body.get("holder_id")
+    input_is_selling = body.get("is_selling")
+    input_event_id = body.get("event_id")
+    if (
+        input_cost is None
+        or input_holder_id is None
+        or input_is_selling is None
+        or input_event_id is None
+    ):
+        return failure_response("Missing event field!", 400)
+    new_ticket = Ticket(
+        cost=input_cost,
+        holder_id=input_holder_id,
+        is_selling=input_is_selling,
+        event_id=input_event_id,
+    )
+    db.session.add(new_ticket)
+    db.session.commit()
+    return success_response(new_ticket.serialize(), 201)
 
 
-# sell ticket
 @app.route("/api/tickets/<int:ticket_id>/", methods=["POST"])
 def sell_ticket(ticket_id):
-    pass
+    ticket = Ticket.query.filter_by(id=ticket_id).first()
+    if ticket is None:
+        return failure_response("Ticket not found")
+    ticket.is_selling = True
+    db.session.commit()
+    return success_response(ticket.serialize(), 201)
 
 
-# buy ticket
 @app.route("/api/tickets/<int:ticket_id>/", methods=["POST"])
 def buy_ticket(ticket_id):
-    pass
+    """
+    Endpoint for buying a ticket.
+    """
+    ticket = Ticket.query.filter_by(id=ticket_id).first()
+    if ticket is None:
+        return failure_response("Ticket not found!")
+    body = json.loads(request.data)
+    buyer_id = body.get("buyer_id")
+    if buyer_id is None:
+        return failure_response("Missing buyer_id!", 400)
+    if ticket.is_selling:
+        ticket.holder_id = buyer_id
+        db.session.commit()
+    return success_response(ticket.serialize(), 201)
+    # return original ticket if ticket is NOT being sold
 
 
 if __name__ == "__main__":
