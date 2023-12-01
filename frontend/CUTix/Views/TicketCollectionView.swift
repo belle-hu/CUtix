@@ -61,10 +61,11 @@ class TicketCollectionView: UICollectionViewCell {
     func setupTicketPrice() {
         ticketPrice.textColor = .black
         ticketPrice.font = UIFont(name: "SF Pro", size: 30)
+        ticketPrice.font = .systemFont(ofSize: 30, weight: .semibold)
         contentView.addSubview(ticketPrice)
         
         ticketPrice.snp.makeConstraints { make in
-            make.top.equalTo(ticketImage.snp.top).offset(16)
+            make.top.equalTo(ticketImage.snp.top).offset(50)
             make.trailing.equalTo(ticketImage.snp.trailing).offset(-30)
         }
     }
@@ -72,11 +73,14 @@ class TicketCollectionView: UICollectionViewCell {
     func setupTicketTime() {
         ticketTime.textColor = .black
         ticketTime.font = UIFont(name: "SF Pro", size: 20)
+        ticketTime.font = .systemFont(ofSize: 20, weight: .semibold)
+        ticketTime.numberOfLines = 2
         contentView.addSubview(ticketTime)
         
         ticketTime.snp.makeConstraints { make in
             make.leading.equalTo(ticketImage.snp.leading).offset(8)
-            make.top.equalTo(ticketPrice.snp.top)
+            make.trailing.equalToSuperview().offset(-100)
+            make.top.equalTo(ticketImage.snp.top).offset(20)
         }
     }
     
