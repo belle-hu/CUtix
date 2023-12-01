@@ -50,12 +50,14 @@ class FilterCollectionView: UICollectionViewCell {
     
     private func filterTapped() {
         if isSelected {
-            filterLabel.backgroundColor = .black
+            filterLabel.backgroundColor = UIColor(red: 0.7, green: 0.11, blue: 0.11, alpha: 1)
             filterLabel.textColor = .white
         }
         else {
             filterLabel.textColor = .black
-            filterLabel.backgroundColor = .lightGray
+            filterLabel.backgroundColor = .white
+            filterLabel.layer.borderWidth = 1.0
+            filterLabel.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
     

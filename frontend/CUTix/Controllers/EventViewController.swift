@@ -25,10 +25,14 @@ class EventViewController: UIViewController {
     private let moneyButton = UIButton()
     private let profileButton = UIButton()
     
+    private let redBanner = UILabel()
+    private let bottomBanner = UILabel()
+    private let CutixTitle = UILabel()
+    
     // MARK: - Properties (data)
     let filters: [String] = ["All", "Concerts", "Clubs", "Sports", "Festivals", "Workshops"]
     
-    var dummyData: [Event] = [Event(id: 1234, name: "Hockey: Cornell v Harvard", time: Date(timeIntervalSince1970: 1679775600), category: "Sports", location: "Ithaca", price: 20.00, eventImageUrl: "https://content.etilize.com/Finish/1031247865.jpg"), Event(id: 5542, name: "mxmtoon concert", time: Date(timeIntervalSince1970: 1679901600), category: "Concerts", location: "Ithaca", price: 10.00, eventImageUrl: "https://content.etilize.com/Finish/1031247865.jpg"), Event(id: 9876, name: "Tennis: Cornell vs Columbia", time: Date(timeIntervalSince1970: 1708399200), category: "Sports", location: "Ithaca", price: 8.00, eventImageUrl: "https://content.etilize.com/Finish/1031247865.jpg"), Event(id: 332, name: "Club event", time: Date(timeIntervalSince1970: 1718399300), category: "Clubs", location: "Duffield", price: 5.00, eventImageUrl: "https://content.etilize.com/Finish/1031247865.jpg")
+    var dummyData: [Event] = [Event(id: 1234, name: "Hockey: Cornell v Harvard", time: Date(timeIntervalSince1970: 1679775600), category: "Sports", location: "Ithaca", price: 20.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg"), Event(id: 5542, name: "mxmtoon concert", time: Date(timeIntervalSince1970: 1679901600), category: "Concerts", location: "Ithaca", price: 10.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg"), Event(id: 9876, name: "Tennis: Cornell vs Columbia", time: Date(timeIntervalSince1970: 1708399200), category: "Sports", location: "Ithaca", price: 8.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg"), Event(id: 332, name: "Club event", time: Date(timeIntervalSince1970: 1718399300), category: "Clubs", location: "Duffield", price: 5.00, eventImageUrl: "https://re-mm-assets.s3.amazonaws.com/product_photo/20404/large_Poly_LightPink_7422up_1471501981.jpg")
     ]
     
     var allEvents: [Event] = []
@@ -41,7 +45,6 @@ class EventViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     
-        title = "CUTix"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
         
@@ -49,7 +52,10 @@ class EventViewController: UIViewController {
         allEvents = dummyData
         
         setupHorizCollectionView()
+        setupRedBanner()
+        setupBottomBanner()
         setupEventTitle()
+        setupCutixTitle()
         setupTimeSortButton()
         setupCollectionView()
         setupDatePickerButton()
@@ -82,6 +88,20 @@ class EventViewController: UIViewController {
             make.top.equalTo(filterCollectionView.snp.bottom).offset(20)
         }
         
+    }
+    
+    func setupCutixTitle() {
+        CutixTitle.text = "CuTix"
+        CutixTitle.textColor = .white
+        CutixTitle.font = UIFont(name: "SFProRounded", size: 35)
+        CutixTitle.font = .systemFont(ofSize: 35, weight: .semibold)
+        
+        view.addSubview(CutixTitle)
+        
+        CutixTitle.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(75)
+        }
     }
     
     func setupTimeSortButton() {
@@ -170,7 +190,7 @@ class EventViewController: UIViewController {
         collectionViewOne.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview()
             make.top.equalTo(filterCollectionView.snp.bottom).offset(60)
-            make.bottom.equalToSuperview().offset(-50)
+            make.bottom.equalTo(bottomBanner.snp.top)
         }
         
     }
@@ -240,9 +260,9 @@ class EventViewController: UIViewController {
     }
     
     private func setupButtons() {
-        searchButton.setImage(UIImage(named: "Search icon"), for: .normal)
-        profileButton.setImage(UIImage(named: "pfp"), for: .normal)
-        moneyButton.setImage(UIImage(named: "ph_money-thin"), for: .normal)
+        searchButton.setImage(UIImage(named: "whiteSearch"), for: .normal)
+        profileButton.setImage(UIImage(named: "whiteProfile"), for: .normal)
+        moneyButton.setImage(UIImage(named: "whiteMoney"), for: .normal)
         
         moneyButton.addTarget(self, action: #selector(moneyButtonTapped), for: .touchUpInside)
         profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -267,6 +287,28 @@ class EventViewController: UIViewController {
             make.bottom.equalTo(moneyButton.snp.bottom).offset(-5)
             make.trailing.equalToSuperview().offset(-72)
             make.size.equalTo(30)
+        }
+    }
+    
+    private func setupRedBanner() {
+        redBanner.backgroundColor = UIColor(red: 0.7, green: 0.11, blue: 0.11, alpha: 1)
+        view.addSubview(redBanner)
+        
+        redBanner.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalTo(130)
+        }
+    }
+    
+    private func setupBottomBanner() {
+        bottomBanner.backgroundColor = UIColor(red: 0.7, green: 0.11, blue: 0.11, alpha: 1)
+        view.addSubview(bottomBanner)
+        
+        bottomBanner.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(42)
         }
     }
     

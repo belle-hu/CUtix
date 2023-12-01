@@ -23,7 +23,7 @@ class TicketInfoVC: UIViewController {
     private let profileImage = UIImageView()
     private let sellerUsername = UILabel()
     private let contactSellerButton = UIButton()
-    private let makeOfferButton = UIButton()
+    private let makeOfferButton2 = UIButton()
     private let subtotalLabel = UILabel()
     private let dollarLabel = UILabel()
     private let ticketpriceLabel = UILabel()
@@ -49,7 +49,7 @@ class TicketInfoVC: UIViewController {
         setupProfileImage()
         setupSellerUsername()
         setupContactSellerButton()
-        setupMakeOfferButton()
+        setupMakeOfferButton2()
         setupTicketPriceLabel()
         setupSubtotalLabel()
         setupDollarLabel()
@@ -202,24 +202,27 @@ class TicketInfoVC: UIViewController {
         }
     }
 
-    private func setupMakeOfferButton() {
-        makeOfferButton.setTitle("Make Offer", for: .normal)
-        makeOfferButton.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
-        makeOfferButton.setTitleColor(UIColor.white, for: .normal)
-        makeOfferButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        makeOfferButton.layer.cornerRadius = 20
+    private func setupMakeOfferButton2() {
+        makeOfferButton2.setTitle("Make Offer", for: .normal)
+        makeOfferButton2.backgroundColor = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
+        makeOfferButton2.setTitleColor(UIColor.white, for: .normal)
+        makeOfferButton2.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        makeOfferButton2.layer.cornerRadius = 20
         //makeOfferButton.addTarget(self, action: #selector(makeOfferButtonTapped), for: .touchUpInside)
-        view.addSubview(makeOfferButton)
-        
-        makeOfferButton.snp.makeConstraints { make in
+        view.addSubview(makeOfferButton2)
+        makeOfferButton2.snp.makeConstraints { make in
             make.top.equalTo(contactSellerButton.snp.bottom).offset(18)
             make.leading.equalToSuperview().offset(18)
             make.trailing.equalToSuperview().offset(-18)
             make.height.equalTo(41)
-            
         }
         
-        //makeOfferButton.addTarget(self, action: #selector(makeOfferButtonTapped), for: .touchUpInside)
+        makeOfferButton2.addTarget(self, action: #selector(makeOfferButton2Tapped), for: .touchUpInside)
+    }
+    
+    @objc func makeOfferButton2Tapped() {
+        let makeOfferVC = MakeOfferVC(ticket: ticket, event: event)
+        self.navigationController?.pushViewController(makeOfferVC, animated: true)
     }
 
     private func setupSubtotalLabel() {
@@ -244,7 +247,7 @@ class TicketInfoVC: UIViewController {
         
         dollarLabel.snp.makeConstraints { make in
             make.trailing.equalTo(ticketpriceLabel.snp.leading).offset(-5)
-            make.top.equalTo(secondLine.snp.bottom).offset(20.96)
+            make.top.equalTo(secondLine.snp.bottom).offset(12.96)
             make.centerY.equalTo(ticketpriceLabel.snp.centerY)
         }
     }
@@ -257,7 +260,7 @@ class TicketInfoVC: UIViewController {
         
         ticketpriceLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(265)
-            make.top.equalTo(secondLine.snp.bottom).offset(20.96)
+            make.top.equalTo(secondLine.snp.bottom).offset(12.96)
         }
     }
     

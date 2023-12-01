@@ -1,8 +1,8 @@
 //
-//  EventCollectionView.swift
+//  SellingTicketCollectionView.swift
 //  CUTix
 //
-//  Created by Maisie Yan on 11/18/23.
+//  Created by Rica Craig on 11/30/23.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-class EventCollectionView: UICollectionViewCell {
+class SellingTicketCollectionView: UICollectionViewCell {
     // MARK: - Properties (view)
     
     private let eventImage = UIImageView()
@@ -20,7 +20,7 @@ class EventCollectionView: UICollectionViewCell {
     private let eventName = UILabel()
     private let eventLocation = UILabel()
     
-    static let reuse = "EventCollectionViewReuse"
+    static let reuse = "SellingTicketCollectionViewReuse"
     
     
     // MARK: - init
@@ -118,4 +118,5 @@ class EventCollectionView: UICollectionViewCell {
     }
     
 }
+
 

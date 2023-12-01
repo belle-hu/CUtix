@@ -19,6 +19,7 @@ class DetailedVC: UIViewController {
     private let searchButton = UIButton()
     private let moneyButton = UIButton()
     private let profileButton = UIButton()
+    private let bottomBanner = UILabel()
     
     // MARK: - Properties (data)
     private var event: Event
@@ -38,6 +39,7 @@ class DetailedVC: UIViewController {
         setupTicketTitle()
         setupAvailableTitle()
         setupCollectionView()
+        setupBottomBanner()
         setupButtons()
     }
     
@@ -123,9 +125,9 @@ class DetailedVC: UIViewController {
     }
     
     private func setupButtons() {
-        searchButton.setImage(UIImage(named: "Search icon"), for: .normal)
-        profileButton.setImage(UIImage(named: "pfp"), for: .normal)
-        moneyButton.setImage(UIImage(named: "ph_money-thin"), for: .normal)
+        searchButton.setImage(UIImage(named: "whiteSearch"), for: .normal)
+        profileButton.setImage(UIImage(named: "whiteProfile"), for: .normal)
+        moneyButton.setImage(UIImage(named: "whiteMoney"), for: .normal)
         
         moneyButton.addTarget(self, action: #selector(moneyButtonTapped), for: .touchUpInside)
         profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -151,6 +153,17 @@ class DetailedVC: UIViewController {
             make.bottom.equalTo(moneyButton.snp.bottom).offset(-5)
             make.trailing.equalToSuperview().offset(-72)
             make.size.equalTo(30)
+        }
+    }
+    
+    private func setupBottomBanner() {
+        bottomBanner.backgroundColor = UIColor(red: 0.7, green: 0.11, blue: 0.11, alpha: 1)
+        view.addSubview(bottomBanner)
+        
+        bottomBanner.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(42)
         }
     }
 
