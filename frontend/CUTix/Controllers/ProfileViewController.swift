@@ -148,14 +148,16 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UpdateTextDelegate {
-    func updateText(usernameText: String, yearText: String, schoolText: String, description: String) {
+    func updateText(usernameText: String, yearText: String, schoolText: String, majorText: String, description: String) {
         usernameTextDelegate = usernameText
         yearTextDelegate = yearText
         schoolTextDelegate = schoolText
+        majorTextDelegate = majorText
         descriptionTextDelegate = description
         usernameLabel.text = usernameText
         yearLabel.text = yearText
         schoolLabel.text = schoolText
+        majorLabel.text = majorText
         descriptionLabel.text = description
     }
 }
