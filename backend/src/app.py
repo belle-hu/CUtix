@@ -1,10 +1,10 @@
 import json
 
-from backend.src.db import db
-from backend.src.db import User
+from db import db
+from db import User
 
-from backend.src.db import Ticket
-from backend.src.db import Event
+from db import Ticket
+from db import Event
 from flask import Flask, request
 
 app = Flask(__name__)
