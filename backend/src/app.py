@@ -49,6 +49,17 @@ def create_user():
     return success_response(new_user.serialize(), 201)
 
 
+@app.route("/api/users/tickets/<int::user_id>/", methods=["GET"])
+def get_tickets_of_user(user_id):
+    """
+    Endoing for getting the tickets of a specific user.
+    """
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found")
+    return success_response(user.holding_tickets)
+
+
 @app.route("/api/users/<int:user_id>/", methods=["GET"])
 def get_user(user_id):
     """
