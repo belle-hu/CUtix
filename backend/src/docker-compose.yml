@@ -1,0 +1,6 @@
+version: "3"
+services:
+  demo:
+    image: "bh552411/cutix"
+    ports:
+    - "80:8000"
