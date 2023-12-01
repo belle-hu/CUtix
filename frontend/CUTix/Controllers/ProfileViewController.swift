@@ -133,7 +133,7 @@ class ProfileViewController: UIViewController {
         
         editProfileButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-12)
-            make.top.equalToSuperview().offset(65)
+            make.top.equalToSuperview().offset(130)
         }
         
         editProfileButton.addTarget(self, action: #selector(pushEditButton), for: .touchUpInside)

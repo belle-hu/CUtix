@@ -190,7 +190,7 @@ class EventViewController: UIViewController {
         collectionViewOne.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview()
             make.top.equalTo(filterCollectionView.snp.bottom).offset(60)
-            make.bottom.equalToSuperview().offset(-50)
+            make.bottom.equalTo(bottomBanner.snp.top)
         }
         
     }
