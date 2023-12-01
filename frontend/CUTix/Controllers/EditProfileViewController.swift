@@ -42,14 +42,11 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        //setupUsernameTitle()
         setupUsernameField()
-        //setupYearTitle()
         setupYearField()
-        //setupSchoolTitle()
         setupSchoolField()
-        //setupDescriptionTitle()
         setupDescriptionField()
+        saveProfilePop()
     }
     
     init(username: String, year: String, school: String, description: String, delegate: UpdateTextDelegate) {
@@ -71,113 +68,72 @@ class EditProfileViewController: UIViewController {
     
     // MARK: - Set Up Views
     
-//    private func setupUsernameTitle() {
-//        usernameLabel.text = "Username: "
-//        usernameLabel.font = UIFont(name: "SF Pro", size: 20)
-//        usernameLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-//        view.addSubview(usernameLabel)
-//
-//        usernameLabel.snp.makeConstraints { make in
-//            make.leading.equalToSuperview().offset(28)
-//            make.top.equalToSuperview().offset(500)
-//        }
-//    }
-    
     private func setupUsernameField() {
         userField.layer.borderWidth = 1
         userField.layer.borderColor = UIColor.lightGray.cgColor
         userField.layer.cornerRadius = 8
-        userField.placeholder = "Username: "
+        userField.placeholder = "   Username: "
         userField.textAlignment = .left
         
         view.addSubview(userField)
         
         userField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(28)
-            make.top.equalToSuperview().offset(500)
+            make.trailing.equalToSuperview().offset(-28)
+            make.height.equalTo(40)
+            make.top.equalToSuperview().offset(400)
         }
     }
-    
-//    private func setupYearTitle() {
-//        yearLabel.text = "Year: "
-//        yearLabel.font = UIFont(name: "SF Pro", size: 20)
-//        yearLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-//        view.addSubview(yearLabel)
-//
-//        yearLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(usernameLabel.snp.leading)
-//            make.top.equalTo(usernameLabel.snp.bottom).offset(50)
-//        }
-//    }
     
     private func setupYearField() {
         yearField.layer.borderWidth = 1
         yearField.layer.borderColor = UIColor.lightGray.cgColor
         yearField.layer.cornerRadius = 8
-        yearField.placeholder = "Year: "
+        yearField.placeholder = "   Year: "
         yearField.textAlignment = .left
         
         view.addSubview(yearField)
         
         yearField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(28)
-            make.top.equalToSuperview().offset(500)
+            make.top.equalTo(userField.snp.bottom).offset(50)
+            make.trailing.equalToSuperview().offset(-28)
+            make.height.equalTo(40)
         }
 
     }
-    
-//    private func setupSchoolTitle() {
-//        schoolLabel.text = "School: "
-//        schoolLabel.font = UIFont(name: "SF Pro", size: 20)
-//        schoolLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-//        view.addSubview(schoolLabel)
-//
-//        schoolLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(usernameLabel.snp.leading)
-//            make.top.equalTo(yearLabel.snp.bottom).offset(50)
-//        }
-//    }
     
     private func setupSchoolField() {
         schoolField.layer.borderWidth = 1
         schoolField.layer.borderColor = UIColor.lightGray.cgColor
         schoolField.layer.cornerRadius = 8
-        schoolField.placeholder = "School: "
+        schoolField.placeholder = "   School: "
         schoolField.textAlignment = .left
         
         view.addSubview(schoolField)
         
         schoolField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(28)
-            make.top.equalToSuperview().offset(500)
+            make.top.equalTo(yearField.snp.bottom).offset(50)
+            make.trailing.equalToSuperview().offset(-28)
+            make.height.equalTo(40)
         }
-
     }
-//
-//    private func setupDescriptionTitle() {
-//        descriptionLabel.text = "Description: "
-//        descriptionLabel.font = UIFont(name: "SF Pro", size: 20)
-//        descriptionLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-//        view.addSubview(descriptionLabel)
-//
-//        descriptionLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(usernameLabel.snp.leading)
-//            make.top.equalTo(schoolLabel.snp.bottom).offset(50)
-//        }
-//    }
     
     private func setupDescriptionField() {
         descriptionField.layer.borderWidth = 1
         descriptionField.layer.borderColor = UIColor.lightGray.cgColor
         descriptionField.layer.cornerRadius = 8
-        descriptionField.placeholder = "Description: "
+        descriptionField.placeholder = "   Description: "
         descriptionField.textAlignment = .left
         
         view.addSubview(descriptionField)
         
         descriptionField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(28)
-            make.top.equalToSuperview().offset(500)
+            make.top.equalTo(schoolField.snp.bottom).offset(50)
+            make.trailing.equalToSuperview().offset(-28)
+            make.height.equalTo(40)
         }
 
     }
@@ -189,7 +145,7 @@ class EditProfileViewController: UIViewController {
         view.addSubview(saveButton)
         
         saveButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(66)
+            make.top.equalToSuperview().offset(100)
             make.leading.equalToSuperview().offset(28)
         }
         
