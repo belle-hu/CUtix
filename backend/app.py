@@ -8,7 +8,7 @@ from db import Event
 from flask import Flask, request
 
 app = Flask(__name__)
-db_filename = "cms.db"
+db_filename = "cutix.db"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///%s" % db_filename
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -72,7 +72,7 @@ def create_event():
     input_name = body.get("name")
     input_time = body.get("time")
     input_category = body.get("category")
-    input_location = body.get("string")
+    input_location = body.get("location")
     if (
         input_name is None
         or input_time is None
@@ -88,7 +88,7 @@ def create_event():
     )
     db.session.add(new_event)
     db.session.commit()
-    return success_response(new_event.serialize(), 201)
+    return success_response(new_event.simple_serialize(), 201)
 
 
 @app.route("/api/events/", methods=["GET"])
@@ -96,11 +96,11 @@ def get_events():
     """
     Endpoint for getting all events.
     """
-    events = [event.serialize() for event in Event.query.all()]
+    events = [event.simple_serialize() for event in Event.query.all()]
     return success_response({"Events": events})
 
 
-@app.route("/api/events/", methods=["GET"])
+@app.route("/api/event/search/", methods=["GET"])
 def get_events_by_search():
     """
     Endpoint for getting events by search, case-insensitive.
@@ -111,8 +111,10 @@ def get_events_by_search():
     if name == None:
         return failure_response("Missing name in request", 400)
     case_insn_events = get_case_insn_events(name)
+    # Cornell cOrNell
     # missing_char_events = get_missing_char_events(name)
     space_insn_events = get_space_events(name)
+    # Cornell c O r N
     all_events = {
         "case insensitive equal events": case_insn_events,
         "space insensitive equal events": space_insn_events,
@@ -122,20 +124,20 @@ def get_events_by_search():
 
 def get_case_insn_events(name):
     valid_events = []
-    for ticket in Ticket.query.all():
-        nam = ticket.name
+    for event in Event.query.all():
+        nam = event.name
         if nam.casefold() == name.casefold():
-            valid_events.append(ticket.serialize())
+            valid_events.append(event.simple_serialize())
     return valid_events
 
 
 def get_space_events(name):
     valid_events = []
-    for ticket in Ticket.query.all():
-        nam_strip = ticket.name.replace(" ", "")
+    for event in Event.query.all():
+        nam_strip = event.name.replace(" ", "")
         name_strip = name.replace(" ", "")
         if nam_strip.casefold() == name_strip.casefold():
-            valid_events.append(ticket.serialize())
+            valid_events.append(event.simple_serialize())
     return valid_events
 
 
@@ -178,7 +180,7 @@ def sell_ticket(ticket_id):
     return success_response(ticket.serialize(), 201)
 
 
-@app.route("/api/tickets/<int:ticket_id>/", methods=["POST"])
+@app.route("/api/tickets/buy/<int:ticket_id>/", methods=["POST"])
 def buy_ticket(ticket_id):
     """
     Endpoint for buying a ticket.

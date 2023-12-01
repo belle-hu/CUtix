@@ -42,6 +42,16 @@ class User(db.Model):
             "netid": self.netid,
         }
 
+    def simple_serialize(self):
+        """
+        Simple seriliaze User object without holding_tickets field.
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "netid": self.netid,
+        }
+
 
 class Event(db.Model):
     """
@@ -79,6 +89,18 @@ class Event(db.Model):
             "tickets": [t.simple_serialize_event() for t in self.tickets],
         }
 
+    def simple_serialize(self):
+        """
+        Simple serialize an Event Object without the tickets field.
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "time": self.time,
+            "category": self.category,
+            "location": self.location,
+        }
+
 
 class Ticket(db.Model):
     """
@@ -87,7 +109,7 @@ class Ticket(db.Model):
 
     __tablename__ = "ticket"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    cost = db.Column(db.Double, nullable=False)
+    cost = db.Column(db.Integer, nullable=False)
     holder_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
     event_id = db.Column(db.Integer, db.ForeignKey("event.id"), nullable=False)
     is_selling = db.Column(db.Boolean, nullable=False)
@@ -109,8 +131,8 @@ class Ticket(db.Model):
         holder = User.query.filter_by(id=self.holder_id).first()
         return {
             "id": self.id,
-            "event": event,
-            "holder": holder,
+            "event": event.simple_serialize(),
+            "holder": holder.simple_serialize(),
             "cost": self.cost,
             "is_selling": self.is_selling,
         }
@@ -122,7 +144,7 @@ class Ticket(db.Model):
         event = Event.query.filter_by(id=self.event_id).first()
         return {
             "id": self.id,
-            "event": event,
+            "event": event.simple_serialize(),
             "cost": self.cost,
             "is_selling": self.is_selling,
         }
@@ -134,7 +156,7 @@ class Ticket(db.Model):
         holder = Event.query.filter_by(id=self.holder_id).first()
         return {
             "id": self.id,
-            "holder": holder,
+            "holder": holder.simple_serialize,
             "cost": self.cost,
             "is_selling": self.is_selling,
         }
