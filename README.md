@@ -23,4 +23,7 @@ On the Backend side, we've implemented 3 database models with 2 main relationshi
 as well as at least 4 routes with at least one route of 
 each category (POST, GET, DELETE) as per our API specification. 
 
-Anything else you want your grader to know
+![Simulator Screenshot - iPhone 15 - 2023-12-01 at 23 39 12](https://github.com/belle-hu/CUtix/assets/104234383/ff5c0675-f199-4dc8-a011-f7e37b7d2bd8)
+
+![Simulator Screenshot - iPhone 15 Pro - 2023-12-01 at 22 31 19](https://github.com/belle-hu/CUtix/assets/104234383/26adc81f-fff4-4c43-ae3e-42305232ed49)
+
