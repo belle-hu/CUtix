@@ -199,6 +199,15 @@ def create_ticket():
     return success_response(new_ticket.serialize(), 201)
 
 
+@app.route("/api/tickets/", methods=["GET"])
+def get_tickets():
+    """
+    Endpoint for getting all tickets.
+    """
+    tickets = [ticket.simple_serialize() for ticket in Ticket.query.all()]
+    return success_response({"Tickets": tickets})
+
+
 @app.route("/api/tickets/<int:ticket_id>/", methods=["POST"])
 def sell_ticket(ticket_id):
     ticket = Ticket.query.filter_by(id=ticket_id).first()
