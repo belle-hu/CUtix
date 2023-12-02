@@ -13,6 +13,8 @@ N/A (all of our code is on this repo!)
 
 ![Simulator Screenshot - iPhone 15 Pro - 2023-12-01 at 22 31 19](https://github.com/belle-hu/CUtix/assets/104234383/26adc81f-fff4-4c43-ae3e-42305232ed49)
 
+![Simulator Screenshot - iPhone 15 - 2023-12-01 at 23 56 57](https://github.com/belle-hu/CUtix/assets/104234383/18813007-02fc-47dc-a6c2-7560745c20c2)
+
 
 6. A short description of your app (its purpose and features)
 
