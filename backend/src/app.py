@@ -49,7 +49,7 @@ def create_user():
     return success_response(new_user.serialize(), 201)
 
 
-@app.route("/api/users/tickets/<int::user_id>/", methods=["GET"])
+@app.route("/api/users/tickets/<int:user_id>/", methods=["GET"])
 def get_tickets_of_user(user_id):
     """
     Endoing for getting the tickets of a specific user.
