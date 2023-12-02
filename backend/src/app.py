@@ -117,7 +117,6 @@ def get_events_by_search():
     Endpoint for getting events by search, case-insensitive.
     """
     body = json.loads(request.data)
-    # initialize task
     name = body.get("name")
     if name == None:
         return failure_response("Missing name in request", 400)
@@ -134,6 +133,9 @@ def get_events_by_search():
 
 
 def get_case_insn_events(name):
+    """
+    Helper function for handling event name inputs with case.
+    """
     valid_events = []
     for event in Event.query.all():
         nam = event.name
@@ -143,6 +145,9 @@ def get_case_insn_events(name):
 
 
 def get_space_events(name):
+    """
+    Helper function for handling event name with spaces.
+    """
     valid_events = []
     for event in Event.query.all():
         nam_strip = event.name.replace(" ", "")
@@ -150,6 +155,19 @@ def get_space_events(name):
         if nam_strip.casefold() == name_strip.casefold():
             valid_events.append(event.simple_serialize())
     return valid_events
+
+
+@app.route("/api/events/<int:event_id>/", methods=["DELETE"])
+def delete_course(event_id):
+    """
+    Endpoint for deleting an event by id.
+    """
+    event = Event.query.filter_by(id=event_id).first()
+    if event is None:
+        return failure_response("Event not found!")
+    db.session.delete(event)
+    db.session.commit()
+    return success_response(event.serialize())
 
 
 # -- TICKET ROUTES ------------------------------------------------------
