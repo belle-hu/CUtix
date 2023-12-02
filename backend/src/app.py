@@ -158,7 +158,7 @@ def get_space_events(name):
 
 
 @app.route("/api/events/<int:event_id>/", methods=["DELETE"])
-def delete_course(event_id):
+def delete_event(event_id):
     """
     Endpoint for deleting an event by id.
     """
@@ -223,6 +223,7 @@ def buy_ticket(ticket_id):
         return failure_response("Missing buyer_id!", 400)
     if ticket.is_selling:
         ticket.holder_id = buyer_id
+        ticket.is_selling = False
         db.session.commit()
     return success_response(ticket.serialize(), 201)
     # return original ticket if ticket is NOT being sold
